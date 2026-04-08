@@ -10,6 +10,7 @@ dependencies = [
     "langchain-huggingface>=1.2.1",
     "langchain-ollama>=1.1.0",
     "langgraph>=1.1.6",
+    "plotly>=6.6.0",
     "pydantic>=2.12.5",
     "pytest>=9.0.2",
     "python-dotenv>=1.2.2",
