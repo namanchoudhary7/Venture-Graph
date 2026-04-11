@@ -158,7 +158,7 @@ if analyze_btn and user_idea:
             response = requests.post(
                 "http://127.0.0.1:8000/api/evaluate",
                 json={"idea": user_idea},
-                stream=True
+                stream=True,
             )
             
             if response.status_code != 200:

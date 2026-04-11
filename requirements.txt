@@ -1,0 +1,38 @@
+# =============================================================================
+# Venture-Graph — Python dependencies
+# Install all:  pip install -r requirements.txt
+# =============================================================================
+ 
+# ── Core agent stack ──────────────────────────────────────────────────────────
+langgraph>=0.2.0
+langchain>=0.2.0
+langchain-core>=0.2.0
+fastapi
+uvicorn[standard]
+python-dotenv
+pydantic>=2.0
+requests
+ 
+# ── LLM Providers (install all — only the one matching LLM_PROVIDER is used) ──
+langchain-ollama          # LLM_PROVIDER=ollama
+langchain-huggingface     # LLM_PROVIDER=huggingface
+langchain-openai          # LLM_PROVIDER=openai
+langchain-groq            # LLM_PROVIDER=groq
+langchain-anthropic       # LLM_PROVIDER=anthropic
+ 
+# ── Tool integrations ─────────────────────────────────────────────────────────
+firecrawl-py
+ 
+# ── LangSmith observability ───────────────────────────────────────────────────
+langsmith>=0.1.0
+ 
+# ── RAG memory ────────────────────────────────────────────────────────────────
+chromadb>=0.5.0
+sentence-transformers>=3.0.0
+ 
+# ── Eval benchmark ────────────────────────────────────────────────────────────
+tabulate
+ 
+# ── Frontend ──────────────────────────────────────────────────────────────────
+streamlit
+plotly

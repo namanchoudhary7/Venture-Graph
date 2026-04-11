@@ -1,0 +1,268 @@
+[
+  {
+    "id": "blue_ocean_aerospace",
+    "idea_short": "A SaaS platform for real-time structural health monitor...",
+    "elapsed_s": 12.9,
+    "actual_status": "VALIDATE",
+    "expected_status": "VALIDATE",
+    "status_pass": "\u2713",
+    "actual_score": 90,
+    "judge_total": 50,
+    "reasoning": 15,
+    "schema": 20,
+    "hallucination": 5,
+    "alignment": 10,
+    "judge_notes": "The report lacks specific data and is vague. The confidence score and market saturation warning are inconsistent. The technical feasibility section is weak.",
+    "full_report": {
+      "status": "VALIDATE",
+      "confidence_score": 90,
+      "market_assessment": {
+        "competitors": [
+          {
+            "name": "telemetry.com",
+            "pricing_model": null,
+            "core_features": [
+              "spacecraft health monitoring"
+            ]
+          }
+        ],
+        "market_saturation_warning": false,
+        "summary": "Blue ocean market with low competition"
+      },
+      "technical_feasibility": {
+        "github_repos_found": 6,
+        "average_stars": 0.5,
+        "is_buildable": true,
+        "tech_stack_summary": "Python, Machine Learning, Spacecraft Health Monitoring"
+      },
+      "developer_sentiment": "Positive",
+      "final_verdict": "The startup idea has a high potential for success with a low competition market and a feasible technical implementation."
+    },
+    "judge_scores": {
+      "reasoning_quality": 15,
+      "schema_compliance": 20,
+      "hallucination_risk": 5,
+      "verdict_alignment": 10,
+      "total_score": 50,
+      "judge_notes": "The report lacks specific data and is vague. The confidence score and market saturation warning are inconsistent. The technical feasibility section is weak."
+    }
+  },
+  {
+    "id": "saturated_payments",
+    "idea_short": "An online payment processing platform for e-commerce bu...",
+    "elapsed_s": 3.4,
+    "actual_status": "VALIDATE",
+    "expected_status": "REJECT",
+    "status_pass": "\u2717",
+    "actual_score": 80,
+    "judge_total": 65,
+    "reasoning": 20,
+    "schema": 25,
+    "hallucination": 25,
+    "alignment": 0,
+    "judge_notes": "The report lacks specific data and is overly vague. The final verdict does not align with the market saturation warning and confidence score.",
+    "full_report": {
+      "status": "VALIDATE",
+      "confidence_score": 80,
+      "market_assessment": {
+        "competitors": [
+          {
+            "name": "Stripe",
+            "pricing_model": "subscription",
+            "core_features": [
+              "payment gateway",
+              "online checkout",
+              "subscription management"
+            ]
+          }
+        ],
+        "market_saturation_warning": false,
+        "summary": "The market for payment gateways is relatively saturated, but there is still room for innovation and disruption."
+      },
+      "technical_feasibility": {
+        "github_repos_found": 559,
+        "average_stars": 123.0,
+        "is_buildable": true,
+        "tech_stack_summary": "The technical feasibility of the project is high, with a strong foundation in PHP and a clear understanding of the payment gateway API."
+      },
+      "developer_sentiment": "positive",
+      "final_verdict": "The startup idea has a high potential for success, with a strong market assessment and technical feasibility. However, the market is relatively saturated, and the startup will need to innovate and disrupt the existing players to gain traction."
+    },
+    "judge_scores": {
+      "reasoning_quality": 20,
+      "schema_compliance": 25,
+      "hallucination_risk": 25,
+      "verdict_alignment": 0,
+      "total_score": 65,
+      "judge_notes": "The report lacks specific data and is overly vague. The final verdict does not align with the market saturation warning and confidence score."
+    }
+  },
+  {
+    "id": "niche_biotech",
+    "idea_short": "AI-driven drug interaction prediction tool specifically...",
+    "elapsed_s": 30.9,
+    "actual_status": "VALIDATE",
+    "expected_status": "VALIDATE",
+    "status_pass": "\u2713",
+    "actual_score": 80,
+    "judge_total": 70,
+    "reasoning": 20,
+    "schema": 25,
+    "hallucination": 25,
+    "alignment": 10,
+    "judge_notes": "The report lacks specific data and reasoning, and the final verdict is somewhat vague. The market saturation warning is not aligned with the status given.",
+    "full_report": {
+      "status": "VALIDATE",
+      "confidence_score": 80,
+      "market_assessment": {
+        "competitors": [
+          {
+            "name": "Medicines for Children",
+            "pricing_model": "free",
+            "core_features": [
+              "medicines information pages",
+              "advice on giving medicines",
+              "videos on medicines"
+            ]
+          }
+        ],
+        "market_saturation_warning": false,
+        "summary": "The market for pediatric oncology AI is relatively new and has few competitors, with Medicines for Children being a prominent player."
+      },
+      "technical_feasibility": {
+        "github_repos_found": 1,
+        "average_stars": 0.0,
+        "is_buildable": true,
+        "tech_stack_summary": "The AI_pediatric_oncology repository uses a basic tech stack with no notable features."
+      },
+      "developer_sentiment": "The developer sentiment on Hacker News is mixed, with some articles receiving positive comments and others receiving negative comments.",
+      "final_verdict": "The startup idea has potential, but further development and refinement are needed to make it more competitive in the market."
+    },
+    "judge_scores": {
+      "reasoning_quality": 20,
+      "schema_compliance": 25,
+      "hallucination_risk": 25,
+      "verdict_alignment": 10,
+      "total_score": 70,
+      "judge_notes": "The report lacks specific data and reasoning, and the final verdict is somewhat vague. The market saturation warning is not aligned with the status given."
+    }
+  },
+  {
+    "id": "needs_work_crm",
+    "idea_short": "A CRM tool for small restaurants to manage reservations...",
+    "elapsed_s": 42.1,
+    "actual_status": "VALIDATE",
+    "expected_status": "NEEDS_WORK",
+    "status_pass": "\u2717",
+    "actual_score": 80,
+    "judge_total": 75,
+    "reasoning": 20,
+    "schema": 25,
+    "hallucination": 25,
+    "alignment": 15,
+    "judge_notes": "The report lacks specific data and is vague in some areas. The final verdict is well-reasoned but could be more detailed. The market assessment and technical feasibility sections are mostly compliant, but the presence of suspicious company names raises concerns.",
+    "full_report": {
+      "status": "VALIDATE",
+      "confidence_score": 80,
+      "market_assessment": {
+        "competitors": [
+          {
+            "name": "Software-development-company",
+            "pricing_model": "Custom",
+            "core_features": [
+              "POS system",
+              "CRM",
+              "Reporting engines"
+            ]
+          },
+          {
+            "name": "Software-postventa-basico",
+            "pricing_model": "Subscription",
+            "core_features": [
+              "Java-based POS system",
+              "Secure role-based auth",
+              "Integrated CRM"
+            ]
+          },
+          {
+            "name": "Restaurant-webpage-CSE-326-c.a-1-",
+            "pricing_model": "Free",
+            "core_features": [
+              "Restaurant webpage",
+              "Menu management",
+              "Ordering system"
+            ]
+          }
+        ],
+        "market_saturation_warning": false,
+        "summary": "The market for restaurant CRM software is relatively new and has a low level of saturation, with only a few competitors. The market is expected to grow as more restaurants adopt digital solutions."
+      },
+      "technical_feasibility": {
+        "github_repos_found": 3,
+        "average_stars": 1.67,
+        "is_buildable": true,
+        "tech_stack_summary": "The technical feasibility of the startup idea is high, with a strong presence on GitHub and a clear tech stack. However, the average stars rating is relatively low, indicating a need for improvement in the code quality and maintainability."
+      },
+      "developer_sentiment": "The developer sentiment is mixed, with some positive comments on the potential of the startup idea, but also some negative comments on the competition and the need for improvement in the code quality.",
+      "final_verdict": "The startup idea has a high potential for success, with a relatively new and low-saturated market, a strong technical feasibility, and a clear tech stack. However, the developer sentiment is mixed, and the code quality and maintainability need improvement."
+    },
+    "judge_scores": {
+      "reasoning_quality": 20,
+      "schema_compliance": 25,
+      "hallucination_risk": 25,
+      "verdict_alignment": 15,
+      "total_score": 75,
+      "judge_notes": "The report lacks specific data and is vague in some areas. The final verdict is well-reasoned but could be more detailed. The market assessment and technical feasibility sections are mostly compliant, but the presence of suspicious company names raises concerns."
+    }
+  },
+  {
+    "id": "legal_tech_niche",
+    "idea_short": "An automated contract review tool trained on maritime s...",
+    "elapsed_s": 30.1,
+    "actual_status": "VALIDATE",
+    "expected_status": "VALIDATE",
+    "status_pass": "\u2713",
+    "actual_score": 80,
+    "judge_total": 65,
+    "reasoning": 20,
+    "schema": 25,
+    "hallucination": 5,
+    "alignment": 20,
+    "judge_notes": "The report lacks specific data and reasoning, and the final verdict is vague. The market saturation warning is missing, and the confidence score is not grounded in detailed evidence.",
+    "full_report": {
+      "status": "VALIDATE",
+      "confidence_score": 80,
+      "market_assessment": {
+        "competitors": [
+          {
+            "name": "Tungsten Automation",
+            "pricing_model": "subscription",
+            "core_features": [
+              "AI-powered automation",
+              "document automation",
+              "workflow orchestration"
+            ]
+          }
+        ],
+        "market_saturation_warning": false,
+        "summary": "Blue ocean market with high growth potential"
+      },
+      "technical_feasibility": {
+        "github_repos_found": 3,
+        "average_stars": 0.0,
+        "is_buildable": true,
+        "tech_stack_summary": "Contract AI review using GitHub repositories"
+      },
+      "developer_sentiment": "Positive",
+      "final_verdict": "High potential for growth and adoption in the maritime industry"
+    },
+    "judge_scores": {
+      "reasoning_quality": 20,
+      "schema_compliance": 25,
+      "hallucination_risk": 5,
+      "verdict_alignment": 20,
+      "total_score": 65,
+      "judge_notes": "The report lacks specific data and reasoning, and the final verdict is vague. The market saturation warning is missing, and the confidence score is not grounded in detailed evidence."
+    }
+  }
+]

@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from typing import Optional
 from enum import Enum
 
 class ValidationStatus(str, Enum):
@@ -21,7 +22,7 @@ class MarketAssessment(BaseModel):
 
 class TechFeasibility(BaseModel):
     github_repos_found: int
-    average_stars: int
+    average_stars: Optional[int] = None
     is_buildable: bool
     tech_stack_summary: str
 
