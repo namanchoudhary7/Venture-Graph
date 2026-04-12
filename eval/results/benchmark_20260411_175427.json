@@ -1,0 +1,51 @@
+[
+  {
+    "id": "custom",
+    "idea_short": "An online payment processing platform for e-commerce bu...",
+    "elapsed_s": 17.9,
+    "actual_status": "VALIDATE",
+    "expected_status": "\u2014",
+    "status_pass": "\u2713",
+    "actual_score": 65,
+    "judge_total": 75,
+    "reasoning": 20,
+    "schema": 20,
+    "hallucination": 20,
+    "alignment": 15,
+    "judge_notes": "Reasoning quality is good, but lacks specific data to support claims. Schema compliance is good, but missing required fields (e.g., competitor names). Hallucination risk is moderate due to vague statements about market saturation. Verdict alignment is poor due to mismatch between confidence score and status.",
+    "full_report": {
+      "status": "VALIDATE",
+      "confidence_score": 65,
+      "market_assessment": {
+        "competitors": [
+          {
+            "name": "Stripe",
+            "pricing_model": "subscription",
+            "core_features": [
+              "payment gateway",
+              "e-commerce platform"
+            ]
+          }
+        ],
+        "market_saturation_warning": false,
+        "summary": "The e-commerce market is highly competitive, with established players like Stripe and Amazon dominating the space. However, there is still room for innovation and disruption, particularly in areas like payment gateways and e-commerce platforms."
+      },
+      "technical_feasibility": {
+        "github_repos_found": 3,
+        "average_stars": 450,
+        "is_buildable": true,
+        "tech_stack_summary": "The technical feasibility of the project is high, with a strong foundation in payment gateways and e-commerce platforms. The use of open-source repositories and established technologies like GraphQL and gRPC suggests a high level of buildability."
+      },
+      "developer_sentiment": "The developer community is highly engaged and supportive, with a strong presence on Hacker News and GitHub. The sentiment analysis suggests a positive outlook for e-commerce and payment gateways, with a focus on innovation and disruption.",
+      "final_verdict": "Based on the market assessment, technical feasibility, and developer sentiment, the project has a high potential for success. However, it is essential to continue monitoring the market and adapting to changes in the competitive landscape."
+    },
+    "judge_scores": {
+      "reasoning_quality": 20,
+      "schema_compliance": 20,
+      "hallucination_risk": 20,
+      "verdict_alignment": 15,
+      "total_score": 75,
+      "judge_notes": "Reasoning quality is good, but lacks specific data to support claims. Schema compliance is good, but missing required fields (e.g., competitor names). Hallucination risk is moderate due to vague statements about market saturation. Verdict alignment is poor due to mismatch between confidence score and status."
+    }
+  }
+]

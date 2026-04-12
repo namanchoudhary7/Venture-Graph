@@ -1,9 +1,9 @@
 """
 backend/agent/graph.py
- 
-Supports two execution modes controlled by the AGENT_MODE env var:
-  - AGENT_MODE=sequential  — original ReAct loop
-  - AGENT_MODE=parallel    — Send() fan-out, ~3x faster (default)
+
+Execution mode is controlled by AGENT_MODE in .env (via settings):
+  - parallel   → Send() fan-out, ~3x faster (default)
+  - sequential → original ReAct loop
 """
 
 import os
@@ -11,38 +11,39 @@ from langgraph.graph import StateGraph, END
 from backend.agent.state import AgentState
 from backend.config import settings
 
-os.environ["LANGCHAIN_TRACING_V2"]  = settings.LANGCHAIN_TRACING_V2
-os.environ["LANGCHAIN_ENDPOINT"]    = settings.LANGCHAIN_ENDPOINT
-os.environ["LANGCHAIN_PROJECT"]     = settings.LANGCHAIN_PROJECT
+# LangSmith bootstrap — must happen before any LangChain import
+os.environ["LANGCHAIN_TRACING_V2"] = settings.LANGCHAIN_TRACING_V2
+os.environ["LANGCHAIN_ENDPOINT"]   = settings.LANGCHAIN_ENDPOINT
+os.environ["LANGCHAIN_PROJECT"]    = settings.LANGCHAIN_PROJECT
 if settings.LANGCHAIN_API_KEY:
     os.environ["LANGCHAIN_API_KEY"] = settings.LANGCHAIN_API_KEY
 
-AGENT_MODE = os.getenv("AGENT_MODE", "parallel")
 
 def route_after_research(state: AgentState):
     """Conditional routing for the sequential ReAct loop."""
     messages     = state.get("messages", [])
     last_message = messages[-1]
- 
+
     if state.get("revision_count", 0) >= settings.MAX_REVISIONS:
-        print(f"[SYSTEM] Circuit breaker triggered. Routing to synthesis.")
+        print("[SYSTEM] Circuit breaker triggered. Routing to synthesis.")
         return "synthesis"
- 
+
     if hasattr(last_message, "tool_calls") and last_message.tool_calls:
         print(f"[SYSTEM] Agent called tools: {[t['name'] for t in last_message.tool_calls]}")
         return "tools"
- 
+
     print("[SYSTEM] Agent ready for synthesis.")
     return "synthesis"
 
+
 def _build_sequential_graph():
     from backend.agent.nodes import tool_node, research_node, synthesis_node
- 
+
     workflow = StateGraph(AgentState)
     workflow.add_node("researcher", research_node)
     workflow.add_node("tools",      tool_node)
     workflow.add_node("synthesis",  synthesis_node)
- 
+
     workflow.set_entry_point("researcher")
     workflow.add_conditional_edges(
         "researcher",
@@ -51,18 +52,22 @@ def _build_sequential_graph():
     )
     workflow.add_edge("tools",     "researcher")
     workflow.add_edge("synthesis", END)
- 
+
     return workflow.compile()
+
 
 def _build_parallel_graph():
     from backend.agent.parallel_nodes import compile_parallel_graph
     return compile_parallel_graph()
 
+
 def compile_graph():
     """Returns the compiled graph for the configured AGENT_MODE."""
-    if AGENT_MODE == "parallel":
-        print(f"[SYSTEM] Compiling PARALLEL graph (Send() fan-out).")
+    mode = settings.AGENT_MODE.lower().strip()
+
+    if mode == "parallel":
+        print("[SYSTEM] Compiling PARALLEL graph (Send() fan-out).")
         return _build_parallel_graph()
     else:
-        print(f"[SYSTEM] Compiling SEQUENTIAL graph (ReAct loop).")
+        print("[SYSTEM] Compiling SEQUENTIAL graph (ReAct loop).")
         return _build_sequential_graph()
