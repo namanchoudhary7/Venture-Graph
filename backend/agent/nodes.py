@@ -16,6 +16,7 @@ from backend.tools.github import assess_tech_stack
 from backend.tools.hackernews import analyze_developer_sentiment
 
 from backend.llm import get_groq_llm
+from backend.llm import get_gemini_llm
 from backend.schemas import VCEvaluationOutput
 from backend.memory.rag_memory import (
     retrieve_similar,
@@ -70,7 +71,7 @@ def research_node(state: AgentState) -> dict:
             HumanMessage(content=f"STARTUP IDEA: {idea}"),
         ]
 
-    llm_with_tools = get_groq_llm().bind_tools(tools)
+    llm_with_tools = get_gemini_llm().bind_tools(tools)
     response       = llm_with_tools.invoke(messages)
     rev_count      = state.get("revision_count", 0) + 1
 
@@ -83,7 +84,7 @@ def synthesis_node(state: AgentState) -> dict:
     synthesis_input = [SystemMessage(content=SYNTHESIS_PROMPT)] + messages
 
     # Bind structured output natively to Groq
-    structured_llm = get_groq_llm().with_structured_output(VCEvaluationOutput)
+    structured_llm = get_gemini_llm().with_structured_output(VCEvaluationOutput)
     parsed_report  = structured_llm.invoke(synthesis_input)
     report_dict    = parsed_report.model_dump()
 

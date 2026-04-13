@@ -14,11 +14,8 @@ pydantic>=2.0
 requests
  
 # ── LLM Providers (install all — only the one matching LLM_PROVIDER is used) ──
-langchain-ollama          # LLM_PROVIDER=ollama
-langchain-huggingface     # LLM_PROVIDER=huggingface
-langchain-openai          # LLM_PROVIDER=openai
 langchain-groq            # LLM_PROVIDER=groq
-langchain-anthropic       # LLM_PROVIDER=anthropic
+langchain-google-genai
  
 # ── Tool integrations ─────────────────────────────────────────────────────────
 firecrawl-py

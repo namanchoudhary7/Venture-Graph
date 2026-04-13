@@ -22,26 +22,16 @@ from backend.tools.firecrawl import scrape_competitor_website
 from backend.tools.github import assess_tech_stack
 from backend.tools.hackernews import analyze_developer_sentiment
 from backend.llm import get_groq_llm
+from backend.llm import get_gemini_llm
 from backend.memory.rag_memory import (
     retrieve_similar,
     format_context_for_prompt,
     store_evaluation,
 )
 
-
-# ---------------------------------------------------------------------------
-# Worker input type
-# ---------------------------------------------------------------------------
-
 class WorkerInput(TypedDict):
     input_idea:  str
     rag_context: str
-
-
-# ---------------------------------------------------------------------------
-# Post-processing guard (shared with nodes.py — enforces business rules
-# that small LLMs ignore even when explicitly prompted)
-# ---------------------------------------------------------------------------
 
 def _apply_consistency_rules(report: dict) -> dict:
     """
@@ -94,11 +84,6 @@ def _apply_consistency_rules(report: dict) -> dict:
 
     return report
 
-
-# ---------------------------------------------------------------------------
-# STEP 1 — Orchestrator NODE (returns plain dict — never Send objects)
-# ---------------------------------------------------------------------------
-
 def orchestrator_node(state: AgentState) -> dict:
     """Fetches RAG context and stores it in state for fan_out() to read."""
     idea          = state["input_idea"]
@@ -112,11 +97,6 @@ def orchestrator_node(state: AgentState) -> dict:
 
     return {"rag_context": rag_context}
 
-
-# ---------------------------------------------------------------------------
-# STEP 2 — fan_out EDGE FUNCTION (only place Send() is created)
-# ---------------------------------------------------------------------------
-
 def fan_out(state: AgentState) -> list:
     """Conditional edge — returns Send() list to LangGraph."""
     worker_input: WorkerInput = {
@@ -129,13 +109,8 @@ def fan_out(state: AgentState) -> list:
         Send("sentiment_worker", worker_input),
     ]
 
-
-# ---------------------------------------------------------------------------
-# Shared LLM helper
-# ---------------------------------------------------------------------------
-
 def _ask_llm(prompt: str) -> str:
-    return get_groq_llm().invoke([HumanMessage(content=prompt)]).content.strip()
+    return get_gemini_llm().invoke([HumanMessage(content=prompt)]).content.strip()
 
 
 def _clean_url(raw: str) -> str | None:
@@ -156,11 +131,6 @@ def _clean_query(raw: str, max_words: int = 3) -> str:
     )
     first_line = cleaned.splitlines()[0].strip()
     return " ".join(first_line.split()[:max_words])
-
-
-# ---------------------------------------------------------------------------
-# STEP 3 — Parallel worker nodes
-# ---------------------------------------------------------------------------
 
 def market_worker(state: WorkerInput) -> dict:
     """Identifies the most relevant competitor and scrapes their website."""
@@ -363,11 +333,21 @@ def aggregator_node(state: AgentState) -> dict:
 def parallel_synthesis_node(state: AgentState) -> dict:
     """Synthesises final structured report, applies consistency guards, stores to ChromaDB."""
     messages = state.get("messages", [])
-    synthesis_input = [SystemMessage(content=SYNTHESIS_PROMPT)] + messages
-    synthesis_input = synthesis_input[:20000]
+    aggregated_text = "\n\n".join(
+        [m.content for m in messages if hasattr(m, 'content') and isinstance(m.content, str)]
+    )
+
+    # MAX_CHARS = 20000
+    # if len(aggregated_text) > MAX_CHARS:
+    #     aggregated_text = aggregated_text[:MAX_CHARS] + "\n...[Content Truncated]..."
+
+    synthesis_input = [
+        SystemMessage(content=SYNTHESIS_PROMPT),
+        HumanMessage(content=f"Here is the research to synthesize:\n{aggregated_text}")
+    ]
 
     # Bind structured output natively to Groq
-    structured_llm = get_groq_llm().with_structured_output(VCEvaluationOutput)
+    structured_llm = get_gemini_llm().with_structured_output(VCEvaluationOutput)
     parsed_report = structured_llm.invoke(synthesis_input)
     report_dict   = parsed_report.model_dump()
 

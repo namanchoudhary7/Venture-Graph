@@ -7,11 +7,15 @@ class Settings:
     """
     Single source of truth for all project configuration.
     """
+    LLM_TEMPERATURE: float   = float(os.getenv("LLM_TEMPERATURE", "0.0"))
 
     # ── LLM Configuration (Groq) ──────────────────────────────────────────────
-    LLM_TEMPERATURE: float   = float(os.getenv("LLM_TEMPERATURE", "0.0"))
     GROQ_API_KEY: str | None = os.getenv("GROQ_API_KEY")
     GROQ_MODEL: str          = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+
+    # ── LLM Configuration (Gemini) ──────────────────────────────────────────────
+    GOOGLE_API_KEY: str | None = os.getenv("GOOGLE_API_KEY")
+    GEMINI_MODEL: str          = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
     # ── Tool API Keys ─────────────────────────────────────────────────────────
     FIRECRAWL_API_KEY: str | None = os.getenv("FIRECRAWL_API_KEY")

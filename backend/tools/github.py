@@ -35,8 +35,13 @@ def assess_tech_stack(query:str)->str:
         if not items:
             return f"NO DATA: No GitHub repositories found for query '{query}'. Technology may be too niche or proprietary."
         
+        # --- NEW LOGIC: Calculate the average stars mathematically ---
+        total_stars = sum(repo['stargazers_count'] for repo in items)
+        average_stars = int(total_stars / len(items))
+        
         report = f"### GitHub Technical Assessment for '{query}'\n"
-        report += f"Total repositories found globally: {data.get('total_count', 0)}\n\n"
+        report += f"Total repositories found globally: {data.get('total_count', 0)}\n"
+        report += f"Exact Average Stars (Top {len(items)}): {average_stars}\n\n"
 
         for repo in items:
             report += f"- **{repo['name']}** ({repo['full_name']})\n"

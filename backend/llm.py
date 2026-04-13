@@ -11,7 +11,7 @@ from functools import lru_cache
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_groq import ChatGroq
-
+from langchain_google_genai import ChatGoogleGenerativeAI
 from backend.config import settings
 from backend.schemas import VCEvaluationOutput
 
@@ -29,6 +29,22 @@ def get_groq_llm() -> BaseChatModel:
         model=settings.GROQ_MODEL,
         temperature=settings.LLM_TEMPERATURE,
         api_key=settings.GROQ_API_KEY,
+    )
+
+@lru_cache(maxsize=1)
+def get_gemini_llm() -> BaseChatModel:
+    """
+    Returns a cached ChatGoogleGenerativeAI instance.
+    The same object is reused across all nodes — no redundant initialization.
+    """
+    if not settings.GOOGLE_API_KEY:
+        raise EnvironmentError("GOOGLE_API_KEY is not set in .env")
+        
+    print(f"[LLM] Provider: Google Gemini | Model: {settings.GEMINI_MODEL}")
+    return ChatGoogleGenerativeAI(
+        model=settings.GEMINI_MODEL,
+        temperature=settings.LLM_TEMPERATURE,
+        api_key=settings.GOOGLE_API_KEY,
     )
 
 def get_parser() -> PydanticOutputParser:
